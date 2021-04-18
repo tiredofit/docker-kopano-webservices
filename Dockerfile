@@ -62,12 +62,17 @@ ENV KOPANO_WEBAPP_VERSION=${KOPANO_WEBAPP_VERSION:-"5.1.0"} \
     KOPANO_WEBAPP_PLUGIN_MDM_REPO_URL=${KOPANO_WEBAPP_PLUGIN_MDM_REPO_URL:-"https://stash.kopano.io/scm/kwa/mobile-device-management.git"} \
     KOPANO_WEBAPP_PLUGIN_MEET_REPO_URL=${KOPANO_WEBAPP_PLUGIN_MEET_REPO_URL:-"https://stash.kopano.io/scm/kwa/meet.git"} \
     KOPANO_WEBAPP_PLUGIN_ROCKETCHAT_REPO_URL=${KOPANO_WEBAPP_PLUGIN_ROCKETCHAT_REPO_URL:-"https://cloud.siedl.net/nextcloud/index.php/s/3yKYARgGwfSZe2c/download"} \
-    KOPANO_WEBAPP_PLUGIN_SMIME_REPO_URL=${KOPANO_WEBAPP_PLUGIN_SMIME_REPO_URL:-"https://stash.kopano.io/scm/kwa/smime.git"}
+    KOPANO_WEBAPP_PLUGIN_SMIME_REPO_URL=${KOPANO_WEBAPP_PLUGIN_SMIME_REPO_URL:-"https://stash.kopano.io/scm/kwa/smime.git"} \
+    \
+    PHP_ENABLE_GETTEXT=TRUE \
+    PHP_ENABLE_MBSTRING=TRUE \
+    PHP_ENABLE_XML=TRUE \
+    PHP_ENABLE_ZIP=TRUE
 
 ADD build-assets/ /build-assets
 
 RUN set -x && \
-    curl -sSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - && \
+    curl -sSLk https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - && \
     echo "deb https://deb.nodesource.com/node_14.x buster main" > /etc/apt/sources.list.d/nodejs.list && \
     WEBAPP_BUILD_DEPS=' \
                         ant \
@@ -75,13 +80,9 @@ RUN set -x && \
                         gettext \
                         git \
                         libxml2-utils \
-			            make \
-			            openjdk-11-jdk \
+      	                make \
+			openjdk-11-jdk \
                         nodejs \
-                        php-common \
-                        php-gettext \
-                        php-xml \
-                        php-zip \
                         python \
                         unzip \
                         ' && \
@@ -90,7 +91,7 @@ RUN set -x && \
     apt-get -y install --no-install-recommends \
                 ${WEBAPP_BUILD_DEPS} \
                 && \
-    php-ext enable all && \
+    php-ext enable core && \
     php-ext disable opcache && \
     \
     ### Fetch Source
@@ -222,7 +223,7 @@ RUN set -x && \
     \
     ## Rocketchat
     cd /usr/src/ && \
-    curl -o /usr/src/rocketchat.zip "${KOPANO_WEBAPP_PLUGIN_ROCKETCHAT_REPO_URL}" && \
+    curl -sSLk -o /usr/src/rocketchat.zip "${KOPANO_WEBAPP_PLUGIN_ROCKETCHAT_REPO_URL}" && \
     unzip -d . rocketchat.zip && \
     cd Rocket.Chat && \
     ar x kopano-rocketchat-${KOPANO_WEBAPP_PLUGIN_ROCKETCHAT_VERSION}.deb && \
@@ -289,7 +290,7 @@ RUN set -x && \
     \
     ### Z-Push Install
     mkdir -p /rootfs/usr/share/zpush && \
-    curl -sSL https://github.com/Z-Hub/Z-Push/archive/${Z_PUSH_VERSION}.tar.gz | tar xvfz - --strip 1 -C /rootfs/usr/share/zpush && \
+    curl -sSLk https://github.com/Z-Hub/Z-Push/archive/${Z_PUSH_VERSION}.tar.gz | tar xvfz - --strip 1 -C /rootfs/usr/share/zpush && \
     mkdir -p /rootfs/usr/sbin && \
     ln -s /usr/share/z-push/src/z-push-admin.php /rootfs/usr/sbin/z-push-admin && \
     ln -s /usr/share/z-push/src/z-push-top.php /rootfs/usr/sbin/z-push-top && \
@@ -318,7 +319,6 @@ RUN set -x && \
     echo "Commit: $(cd /usr/src/kopano-webapp ; echo $(git rev-parse HEAD))" >> /rootfs/tiredofit/kopano-webapp.version && \
     env | grep KOPANO | sort >> /rootfs/tiredofit/kopano-webapp.version && \
     echo "ZPush ${ZPUSH_VERSION} built on $(date +'%Y-%m-%d %H:%M:%S')" > /rootfs/tiredofit/zpush.version && \
-    echo "Commit: $(cd /rootfs/usr/share/zpush ; echo $(git rev-parse HEAD))" >> /rootfs/tiredofit/zpush.version && \
     cd /rootfs/ && \
     find . -name .git -type d -print0|xargs -0 rm -rf -- && \
     mkdir -p /kopano-webservices/ && \
