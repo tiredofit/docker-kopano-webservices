@@ -1,3 +1,13 @@
+## 2.1.0 2021-05-01 <dave at tiredofit dot ca>
+
+   ### Added
+      - Kopano Webapp Plugin - Jitsi Meet 1.0.2-1
+      - Kopano Webapp Plugin - Text Templates 1.0.1-1
+
+   ### Changed
+      - Kopano Webapp Plugin - Rocketchat 1.0.4-2
+
+
 ## 2.0.0 2021-04-18 <dave at tiredofit dot ca>
 
    ### Changed
