@@ -42,7 +42,7 @@ ENV KOPANO_WEBAPP_VERSION=${KOPANO_WEBAPP_VERSION:-"tags/v5.1.0"} \
     KOPANO_WEBAPP_PLUGIN_MATTERMOST_VERSION=${KOPANO_WEBAPP_PLUGIN_MATTERMOST_VERSION:-"tags/v1.0.1"} \
     KOPANO_WEBAPP_PLUGIN_MDM_VERSION=${KOPANO_WEBAPP_PLUGIN_MDM_VERSION:-"tags/v3.3.0"} \
     KOPANO_WEBAPP_PLUGIN_MEET_VERSION=${KOPANO_WEBAPP_PLUGIN_MEET_VERSION:-"master"} \
-    KOPANO_WEBAPP_PLUGIN_ROCKETCHAT_VERSION=${KOPANO_WEBAPP_PLUGIN_ROCKETCHAT_VERSION:-"1.0.4-2"} \
+    KOPANO_WEBAPP_PLUGIN_ROCKETCHAT_VERSION=${KOPANO_WEBAPP_PLUGIN_ROCKETCHAT_VERSION:-"1.0.2-1"} \
     KOPANO_WEBAPP_PLUGIN_SMIME_VERSION=${KOPANO_WEBAPP_PLUGIN_SMIME_VERSION:-"tags/v2.2.2"} \
     KOPANO_WEBAPP_PLUGIN_TEXTTEMPLATES_VERSION=${KOPANO_WEBAPP_PLUGIN_TEXTTEMPLATES_VERSION:-"1.0.1-1"} \
     \
@@ -64,7 +64,7 @@ ENV KOPANO_WEBAPP_VERSION=${KOPANO_WEBAPP_VERSION:-"tags/v5.1.0"} \
     KOPANO_WEBAPP_PLUGIN_MATTERMOST_REPO_URL=${KOPANO_WEBAPP_PLUGIN_MATTERMOST_REPO_URL:-"https://stash.kopano.io/scm/kwa/mattermost.git"} \
     KOPANO_WEBAPP_PLUGIN_MDM_REPO_URL=${KOPANO_WEBAPP_PLUGIN_MDM_REPO_URL:-"https://stash.kopano.io/scm/kwa/mobile-device-management.git"} \
     KOPANO_WEBAPP_PLUGIN_MEET_REPO_URL=${KOPANO_WEBAPP_PLUGIN_MEET_REPO_URL:-"https://stash.kopano.io/scm/kwa/meet.git"} \
-    KOPANO_WEBAPP_PLUGIN_ROCKETCHAT_REPO_URL=${KOPANO_WEBAPP_PLUGIN_ROCKETCHAT_REPO_URL:-"https://repo.siedl.net/public/"} \
+    KOPANO_WEBAPP_PLUGIN_ROCKETCHAT_REPO_URL=${KOPANO_WEBAPP_PLUGIN_ROCKETCHAT_REPO_URL:-"https://cloud.siedl.net/nextcloud/index.php/s/3yKYARgGwfSZe2c/download"} \
     KOPANO_WEBAPP_PLUGIN_SMIME_REPO_URL=${KOPANO_WEBAPP_PLUGIN_SMIME_REPO_URL:-"https://stash.kopano.io/scm/kwa/smime.git"} \
     KOPANO_WEBAPP_PLUGIN_TEXTTEMPLATES_REPO_URL=${KOPANO_WEBAPP_PLUGIN_TEXTTEMPLATES_REPO_URL:-"https://repo.siedl.net/public/"} \
     \
@@ -97,7 +97,6 @@ RUN set -ex && \
                 ${WEBAPP_BUILD_DEPS} \
                 && \
     php-ext enable core && \
-    php-ext disable opcache && \
     \
     ### Fetch Source
     git clone ${KOPANO_WEBAPP_REPO_URL} /usr/src/kopano-webapp && \
@@ -266,10 +265,11 @@ RUN set -ex && \
     ln -sf /etc/kopano/webapp/config-mattermost.php /usr/src/kopano-webapp/deploy/plugins/mattermost/config.php && \
     \
     ## Rocketchat
-    mkdir /usr/src/rocketchat && \
-    cd /usr/src/rocketchat && \
-    curl -sSLk -o rocketchat.deb ${KOPANO_WEBAPP_PLUGIN_ROCKETCHAT_REPO_URL}/kopano-rocketchat-${KOPANO_WEBAPP_PLUGIN_ROCKETCHAT_VERSION}.deb && \
-    ar x rocketchat.deb && \
+    cd /usr/src/ && \
+    curl -sSLk -o /usr/src/rocketchat.zip "${KOPANO_WEBAPP_PLUGIN_ROCKETCHAT_REPO_URL}" && \
+    unzip -d . rocketchat.zip && \
+    cd Rocket.Chat && \
+    ar x kopano-rocketchat-${KOPANO_WEBAPP_PLUGIN_ROCKETCHAT_VERSION}.deb && \
     tar xfJ data.tar.xz && \
     cp etc/kopano/webapp/config-rchat.php /rootfs/assets/kopano/config/webapp/config-rchat.php && \
     cp -Rp usr/share/kopano-webapp/plugins/rchat /usr/src/kopano-webapp/deploy/plugins/ && \

@@ -1,3 +1,8 @@
+## 2.1.2 2021-05-04 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Reverted Rocketchat Plugin to 1.0.2-1
+
 ## 2.1.1 2021-05-04 <dave at tiredofit dot ca>
 
    ### Changed
