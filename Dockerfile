@@ -370,6 +370,7 @@ RUN set -ex && \
     \
     mkdir -p /rootfs/etc/php/$(php-fpm -v | head -n 1 | awk '{print $2}' | cut -c 1-3)/mods-available/ && \
     echo "extension=mapi.so" > /rootfs/etc/php/$(php-fpm -v | head -n 1 | awk '{print $2}' | cut -c 1-3)/mods-available/mapi.ini && \
+    echo ";priority=20" >> /rootfs/etc/php/$(php-fpm -v | head -n 1 | awk '{print $2}' | cut -c 1-3)/mods-available/mapi.ini && \
     \
     ### Cleanup and Compress Package
     echo "Kopano KDAV ${KOPANO_KDAV_VERSION} built from ${KOPANO_KDAV_REPO_URL} on $(date +'%Y-%m-%d %H:%M:%S')" > /rootfs/tiredofit/kopano-kdav.version && \

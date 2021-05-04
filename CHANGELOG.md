@@ -1,3 +1,9 @@
+## 2.1.1 2021-05-04 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Add priority=20 to PHP MAPI extension
+
+
 ## 2.1.0 2021-05-01 <dave at tiredofit dot ca>
 
    ### Added
