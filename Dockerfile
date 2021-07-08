@@ -1,5 +1,5 @@
 FROM tiredofit/nginx-php-fpm:debian-7.3-buster as kopano-webservices-builder
-LABEL maintainer="Dave Conroy (dave at tiredofit dot ca)"
+LABEL maintainer="Dave Conroy (github.com/tiredofit)"
 
 ARG KOPANO_WEBAPP_VERSION
 ARG KOPANO_WEBAPP_PLUGIN_FILES_OWNCLOUD_REPO_URL
@@ -30,7 +30,7 @@ ARG KOPANO_WEBAPP_REPO_URL
 ARG KOPANO_KDAV_VERSION
 ARG Z_PUSH_VERSION
 
-ENV KOPANO_WEBAPP_VERSION=${KOPANO_WEBAPP_VERSION:-"tags/v5.1.0"} \
+ENV KOPANO_WEBAPP_VERSION=${KOPANO_WEBAPP_VERSION:-"tags/v5.2.0"} \
     KOPANO_WEBAPP_PLUGIN_FILES_VERSION=${KOPANO_WEBAPP_PLUGIN_FILES_VERSION:-"tags/v4.0.1"} \
     KOPANO_WEBAPP_PLUGIN_FILES_OWNCLOUD_VERSION=${KOPANO_WEBAPP_PLUGIN_FILES_OWNCLOUD_VERSION:-"tags/v4.0.0"} \
     KOPANO_WEBAPP_PLUGIN_FILES_SEAFILE_VERSION=${KOPANO_WEBAPP_PLUGIN_FILES_SEAFILE_VERSION:-"master"} \
@@ -394,7 +394,7 @@ RUN set -ex && \
     rm -rf /usr/src/* /var/cache/apk/*
 
 FROM scratch
-LABEL maintainer="Dave Conroy (dave at tiredofit dot ca)"
+LABEL maintainer="Dave Conroy (github.com/tiredofit)"
 
 COPY --from=kopano-webservices-builder /kopano-webservices/* /kopano-webservices/
 ADD CHANGELOG.md /WEBSERVICES-CHANGELOG.md
