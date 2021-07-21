@@ -119,7 +119,7 @@ RUN set -ex && \
     make all && \
     \
     ### Setup RootFS
-    mkdir -p /rootfs/tiredofit && \
+    mkdir -p /rootfs/assets/.changelogs && \
     mkdir -p /rootfs/usr/share/kopano-webapp && \
     mkdir -p /rootfs/assets/kopano/config/webapp && \
     mkdir -p /rootfs/assets/kopano/plugins/webapp && \
@@ -373,12 +373,12 @@ RUN set -ex && \
     echo ";priority=20" >> /rootfs/etc/php/$(php-fpm -v | head -n 1 | awk '{print $2}' | cut -c 1-3)/mods-available/mapi.ini && \
     \
     ### Cleanup and Compress Package
-    echo "Kopano KDAV ${KOPANO_KDAV_VERSION} built from ${KOPANO_KDAV_REPO_URL} on $(date +'%Y-%m-%d %H:%M:%S')" > /rootfs/tiredofit/kopano-kdav.version && \
-    echo "Commit: $(cd /rootfs/usr/share/kdav ; echo $(git rev-parse HEAD))" >> /rootfs/tiredofit/kopano-kdav.version && \
-    echo "Kopano Webapp ${KOPANO_WEBAPP_VERSION} built from ${KOPANO_WEBAPP_REPO_URL} on $(date +'%Y-%m-%d %H:%M:%S')" > /rootfs/tiredofit/kopano-webapp.version && \
-    echo "Commit: $(cd /usr/src/kopano-webapp ; echo $(git rev-parse HEAD))" >> /rootfs/tiredofit/kopano-webapp.version && \
-    env | grep KOPANO | sort >> /rootfs/tiredofit/kopano-webapp.version && \
-    echo "ZPush ${ZPUSH_VERSION} built on $(date +'%Y-%m-%d %H:%M:%S')" > /rootfs/tiredofit/zpush.version && \
+    echo "Kopano KDAV ${KOPANO_KDAV_VERSION} built from ${KOPANO_KDAV_REPO_URL} on $(date +'%Y-%m-%d %H:%M:%S')" > /rootfs/assets/.changelogs/kopano-kdav.version && \
+    echo "Commit: $(cd /rootfs/usr/share/kdav ; echo $(git rev-parse HEAD))" >> /rootfs/assets/.changelogs/kopano-kdav.version && \
+    echo "Kopano Webapp ${KOPANO_WEBAPP_VERSION} built from ${KOPANO_WEBAPP_REPO_URL} on $(date +'%Y-%m-%d %H:%M:%S')" > /rootfs/assets/.changelogs/kopano-webapp.version && \
+    echo "Commit: $(cd /usr/src/kopano-webapp ; echo $(git rev-parse HEAD))" >> /rootfs/assets/.changelogs/kopano-webapp.version && \
+    env | grep KOPANO | sort >> /rootfs/assets/.changelogs/kopano-webapp.version && \
+    echo "ZPush ${ZPUSH_VERSION} built on $(date +'%Y-%m-%d %H:%M:%S')" > /rootfs/assets/.changelogs/zpush.version && \
     cd /rootfs/ && \
     find . -name .git -type d -print0|xargs -0 rm -rf -- && \
     mkdir -p /kopano-webservices/ && \
@@ -397,4 +397,4 @@ FROM scratch
 LABEL maintainer="Dave Conroy (github.com/tiredofit)"
 
 COPY --from=kopano-webservices-builder /kopano-webservices/* /kopano-webservices/
-ADD CHANGELOG.md /WEBSERVICES-CHANGELOG.md
+COPY CHANGELOG.md /tiredofit_docker-kopano-webservices.md
