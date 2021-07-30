@@ -1,3 +1,9 @@
+## 2.2.2 2021-07-29 <dave at tiredofit dot ca>
+
+   ### Added
+      - Z-Push Upgraded to 2.6.4
+
+
 ## 2.2.1 2021-07-21 <dave at tiredofit dot ca>
 
    ### Changed
