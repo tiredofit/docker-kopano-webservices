@@ -78,7 +78,7 @@ ADD build-assets/ /build-assets
 RUN set -ex && \
     curl -sSLk https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - && \
     echo "deb https://deb.nodesource.com/node_14.x buster main" > /etc/apt/sources.list.d/nodejs.list && \
-    WEBAPP_BUILD_DEPS=' \
+    WEBAPP_BUILD_DEPS=" \
                         ant \
                         ant-optional \
                         gettext \
@@ -90,7 +90,7 @@ RUN set -ex && \
                         python \
                         rsync \
                         unzip \
-                        ' && \
+                        " && \
     apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y --no-install-recommends \
@@ -368,7 +368,7 @@ RUN set -ex && \
     chown -R ${NGINX_USER}:${NGINX_GROUP} /rootfs/usr/share/zpush && \
     chown -R ${NGINX_USER}:${NGINX_GROUP} /rootfs/assets/zpush && \
     \
-    mkdir -p /rootfs/etc/php/$(php-fpm -v | head -n 1 | awk '{print $2}' | cut -c 1-3)/mods-available/ && \
+    mkdir -p /rootfs/etc/php/${PHP_BASE}/mods-available/ && \
     echo "extension=mapi.so" > /rootfs/etc/php/$(php-fpm -v | head -n 1 | awk '{print $2}' | cut -c 1-3)/mods-available/mapi.ini && \
     echo ";priority=20" >> /rootfs/etc/php/$(php-fpm -v | head -n 1 | awk '{print $2}' | cut -c 1-3)/mods-available/mapi.ini && \
     \

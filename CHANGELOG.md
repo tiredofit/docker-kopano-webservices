@@ -1,3 +1,8 @@
+## 2.3.0 2021-08-04 <dave at tiredofit dot ca>
+
+   ### Added
+      - Maintenance Release - Start building PHP 7.3, 7.4, and 8.0 off existing 2.2.2 version
+
 ## 2.2.2 2021-07-29 <dave at tiredofit dot ca>
 
    ### Added
