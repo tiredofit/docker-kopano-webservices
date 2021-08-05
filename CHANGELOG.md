@@ -1,3 +1,9 @@
+## 2.3.1 2021-08-05 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Change in the way Zpush admin and top is named
+
+
 ## 2.3.0 2021-08-04 <dave at tiredofit dot ca>
 
    ### Added
