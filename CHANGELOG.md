@@ -1,3 +1,9 @@
+## 2.3.2 2021-08-12 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Fix for ZPush shortcuts
+
+
 ## 2.3.1 2021-08-05 <dave at tiredofit dot ca>
 
    ### Changed

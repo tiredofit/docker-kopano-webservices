@@ -351,8 +351,8 @@ RUN set -ex && \
     mkdir -p /rootfs/usr/share/zpush && \
     curl -sSLk https://github.com/Z-Hub/Z-Push/archive/${Z_PUSH_VERSION}.tar.gz | tar xvfz - --strip 1 -C /rootfs/usr/share/zpush && \
     mkdir -p /rootfs/usr/sbin && \
-    ln -sf /usr/share/z-push/src/z-push-admin.php /rootfs/usr/sbin/zpush-admin && \
-    ln -sf /usr/share/z-push/src/z-push-top.php /rootfs/usr/sbin/zpush-top && \
+    ln -sf /usr/share/zpush/src/z-push-admin.php /rootfs/usr/sbin/zpush-admin && \
+    ln -sf /usr/share/zpush/src/z-push-top.php /rootfs/usr/sbin/zpush-top && \
     mkdir -p /rootfs/assets/zpush/config && \
     cp -Rp /rootfs/usr/share/zpush/src/config.php /rootfs/assets/zpush/config/ && \
     cp -Rp /rootfs/usr/share/zpush/src/autodiscover/config.php /rootfs/assets/zpush/config/config-autodiscover.php && \
