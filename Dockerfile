@@ -1,4 +1,4 @@
-FROM tiredofit/nginx-php-fpm:debian-7.3-buster as kopano-webservices-builder
+FROM docker.io/tiredofit/nginx-php-fpm:debian-7.3-buster as kopano-webservices-builder
 LABEL maintainer="Dave Conroy (github.com/tiredofit)"
 
 ARG KOPANO_WEBAPP_VERSION
@@ -85,7 +85,7 @@ RUN set -ex && \
                         git \
                         libxml2-utils \
       	                make \
-			            openjdk-11-jdk \
+                  	openjdk-11-jdk \
                         nodejs \
                         python \
                         rsync \

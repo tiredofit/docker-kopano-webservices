@@ -1,3 +1,9 @@
+## 2.3.3 2021-09-25 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Change Dockerfile FROM statements
+
+
 ## 2.3.2 2021-08-12 <dave at tiredofit dot ca>
 
    ### Changed
