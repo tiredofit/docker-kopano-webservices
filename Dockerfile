@@ -39,6 +39,7 @@ ENV KOPANO_WEBAPP_VERSION=${KOPANO_WEBAPP_VERSION:-"tags/v5.3.0"} \
     KOPANO_WEBAPP_PLUGIN_HTMLEDITOR_MINIMALTINY_VERSION=${KOPANO_WEBAPP_PLUGIN_HTMLEDITOR_MINIMALTINY_VERSION:-"tags/v2.0"} \
     KOPANO_WEBAPP_PLUGIN_INTRANET_VERSION=${KOPANO_WEBAPP_PLUGIN_INTRANET_VERSION:-"master"} \
     KOPANO_WEBAPP_PLUGIN_JITSIMEET_VERSION=${KOPANO_WEBAPP_PLUGIN_JITSIMEET_VERSION:-"1.0.2-1"} \
+    KOPANO_WEBAPP_PLUGIN_JODIT_VERSION=${KOPANO_WEBAPP_PLUGIN_JODIT_VERSION:-"tags/v0.3.0"} \
     KOPANO_WEBAPP_PLUGIN_MATTERMOST_VERSION=${KOPANO_WEBAPP_PLUGIN_MATTERMOST_VERSION:-"tags/v1.0.1"} \
     KOPANO_WEBAPP_PLUGIN_MDM_VERSION=${KOPANO_WEBAPP_PLUGIN_MDM_VERSION:-"tags/v3.3.0"} \
     KOPANO_WEBAPP_PLUGIN_MEET_VERSION=${KOPANO_WEBAPP_PLUGIN_MEET_VERSION:-"master"} \
@@ -183,6 +184,7 @@ RUN set -ex && \
     ## HTML Editor: Jodit
     git clone ${KOPANO_WEBAPP_PLUGIN_JODIT_REPO_URL} /usr/src/kopano-webapp/plugins/htmleditor-jodit && \
     cd /usr/src/kopano-webapp/plugins/htmleditor-jodit && \
+    git checkout ${KOPANO_WEBAPP_PLUGIN_JODIT_VERSION} && \
     set +e && \
     if [ -d "/build-assets/plugins/htmleditor-jodit" ] ; then cp -Rp /build-assets/plugins/htmleditor-jodit/* /usr/src/kopano-webapp/plugins/htmleditor-jodit/ ; fi; \
     if [ -d "/build-assets/scripts/plugin-htmleditor-jodit" ] ; then for script in /build-assets/scripts/plugin-htmleditorjodit/*.sh; do echo "** Applying $script"; bash $script; done && \ ; fi ; \

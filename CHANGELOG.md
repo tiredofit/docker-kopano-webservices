@@ -1,3 +1,9 @@
+## 2.3.5 2022-02-28 <dave at tiredofit dot ca>
+
+   ### Added
+      - Add Webapp Plugin Jodit 0.3.0
+
+
 ## 2.3.4 2022-02-28 <dave at tiredofit dot ca>
 
    ### Added
