@@ -1,3 +1,9 @@
+## 2.4.0 2022-03-03 <dave at tiredofit dot ca>
+
+   ### Added
+      - Rework Github actions and bump version because
+
+
 ## 2.3.5 2022-02-28 <dave at tiredofit dot ca>
 
    ### Added
