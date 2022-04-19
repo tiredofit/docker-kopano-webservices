@@ -1,3 +1,9 @@
+## 2.4.2 2022-04-19 <dave at tiredofit dot ca>
+
+   ### Added
+      - Jodit Plugin 0.3.2
+
+
 ## 2.4.1 2022-03-07 <dave at tiredofit dot ca>
 
    ### Added
