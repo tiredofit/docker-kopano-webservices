@@ -1,3 +1,9 @@
+## 2.4.3 2022-05-14 <dave at tiredofit dot ca>
+
+   ### Added
+      - Minor fix for Zpush version in /assets/.changelogs
+
+
 ## 2.4.2 2022-04-19 <dave at tiredofit dot ca>
 
    ### Added

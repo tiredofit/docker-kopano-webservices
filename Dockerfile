@@ -380,7 +380,7 @@ RUN set -ex && \
     echo "Kopano Webapp ${KOPANO_WEBAPP_VERSION} built from ${KOPANO_WEBAPP_REPO_URL} on $(date +'%Y-%m-%d %H:%M:%S')" > /rootfs/assets/.changelogs/kopano-webapp.version && \
     echo "Commit: $(cd /usr/src/kopano-webapp ; echo $(git rev-parse HEAD))" >> /rootfs/assets/.changelogs/kopano-webapp.version && \
     env | grep KOPANO | sort >> /rootfs/assets/.changelogs/kopano-webapp.version && \
-    echo "ZPush ${ZPUSH_VERSION} built on $(date +'%Y-%m-%d %H:%M:%S')" > /rootfs/assets/.changelogs/zpush.version && \
+    echo "ZPush ${Z_PUSH_VERSION} built on $(date +'%Y-%m-%d %H:%M:%S')" > /rootfs/assets/.changelogs/zpush.version && \
     cd /rootfs/ && \
     find . -name .git -type d -print0|xargs -0 rm -rf -- && \
     mkdir -p /kopano-webservices/ && \
