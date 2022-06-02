@@ -1,3 +1,9 @@
+## 2.4.4 2022-06-02 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Fix for Jodit HTML Editor
+
+
 ## 2.4.3 2022-05-14 <dave at tiredofit dot ca>
 
    ### Added
