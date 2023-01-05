@@ -1,7 +1,31 @@
-## 2.4.1 2023-01-05 <dave at tiredofit dot ca>
+## 2.4.5 2023-01-05 <dave at tiredofit dot ca>
 
    ### Added
       - Kopano Webapp 5.3.1
+
+
+## 2.4.4 2022-06-02 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Fix for Jodit HTML Editor
+
+
+## 2.4.3 2022-05-14 <dave at tiredofit dot ca>
+
+   ### Added
+      - Minor fix for Zpush version in /assets/.changelogs
+
+
+## 2.4.2 2022-04-19 <dave at tiredofit dot ca>
+
+   ### Added
+      - Jodit Plugin 0.3.2
+
+
+## 2.4.1 2022-03-07 <dave at tiredofit dot ca>
+
+   ### Added
+      - Rebuild to accomodate for changes in JODIT editor
 
 
 ## 2.4.0 2022-03-03 <dave at tiredofit dot ca>

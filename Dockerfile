@@ -39,7 +39,6 @@ ENV KOPANO_WEBAPP_VERSION=${KOPANO_WEBAPP_VERSION:-"tags/v5.3.1"} \
     KOPANO_WEBAPP_PLUGIN_HTMLEDITOR_MINIMALTINY_VERSION=${KOPANO_WEBAPP_PLUGIN_HTMLEDITOR_MINIMALTINY_VERSION:-"tags/v2.0"} \
     KOPANO_WEBAPP_PLUGIN_INTRANET_VERSION=${KOPANO_WEBAPP_PLUGIN_INTRANET_VERSION:-"master"} \
     KOPANO_WEBAPP_PLUGIN_JITSIMEET_VERSION=${KOPANO_WEBAPP_PLUGIN_JITSIMEET_VERSION:-"1.0.2-1"} \
-    KOPANO_WEBAPP_PLUGIN_JODIT_VERSION=${KOPANO_WEBAPP_PLUGIN_JODIT_VERSION:-"tags/v0.3.0"} \
     KOPANO_WEBAPP_PLUGIN_MATTERMOST_VERSION=${KOPANO_WEBAPP_PLUGIN_MATTERMOST_VERSION:-"tags/v1.0.1"} \
     KOPANO_WEBAPP_PLUGIN_MDM_VERSION=${KOPANO_WEBAPP_PLUGIN_MDM_VERSION:-"tags/v3.3.0"} \
     KOPANO_WEBAPP_PLUGIN_MEET_VERSION=${KOPANO_WEBAPP_PLUGIN_MEET_VERSION:-"master"} \
@@ -56,12 +55,13 @@ ENV KOPANO_WEBAPP_VERSION=${KOPANO_WEBAPP_VERSION:-"tags/v5.3.1"} \
     KOPANO_WEBAPP_PLUGIN_FILES_REPO_URL=${KOPANO_WEBAPP_PLUGIN_FILES_REPO_URL:-"https://stash.kopano.io/scm/kwa/files.git"} \
     KOPANO_WEBAPP_PLUGIN_FILES_SEAFILE_REPO_URL=${KOPANO_WEBAPP_PLUGIN_FILES_SEAFILE_REPO_URL:-"https://github.com/datamate-rethink-it/kopano-seafile-backend.git"} \
     KOPANO_WEBAPP_PLUGIN_FILES_SMB_REPO_URL=${KOPANO_WEBAPP_PLUGIN_FILES_SMB_REPO_URL:-"https://stash.kopano.io/scm/kwa/files-smb-backend.git"} \
+    KOPANO_WEBAPP_PLUGIN_HTMLEDITOR_JODIT_REPO_URL=${KOPANO_WEBAPP_PLUGIN_HTMLEDITOR_JODIT_REPO_URL:-"https://stash.kopano.io/scm/kwa/htmleditor-jodit.git"} \
     KOPANO_WEBAPP_PLUGIN_HTMLEDITOR_MINIMALTINY_REPO_URL=${KOPANO_WEBAPP_PLUGIN_HTMLEDITOR_MINIMALTINY_REPO_URL:-"https://stash.kopano.io/scm/kwa/htmleditor-minimaltiny.git"} \
     KOPANO_WEBAPP_PLUGIN_HTMLEDITOR_QUILL_REPO_URL=${KOPANO_WEBAPP_PLUGIN_HTMLEDITOR_QUILL_REPO_URL:-"https://stash.kopano.io/scm/kwa/htmleditor-quill.git"} \
     KOPANO_WEBAPP_PLUGIN_HTMLEDITOR_QUILL_VERSION=${KOPANO_WEBAPP_PLUGIN_HTMLEDITOR_QUILL_VERSION:-"master"} \
     KOPANO_WEBAPP_PLUGIN_INTRANET_REPO_URL=${KOPANO_WEBAPP_PLUGIN_INTRANET_REPO_URL:-"https://stash.kopano.io/scm/kwa/intranet.git"} \
     KOPANO_WEBAPP_PLUGIN_JITSIMEET_REPO_URL=${KOPANO_WEBAPP_PLUGIN_JITSIMEET_REPO_URL:-"https://repo.siedl.net/public/"} \
-    KOPANO_WEBAPP_PLUGIN_JODIT_REPO_URL=${KOPANO_WEBAPP_PLUGIN_HTMLEDITOR_JODIT_REPO_URL:-"https://stash.kopano.io/scm/kwa/htmleditor-jodit.git"} \
+    KOPANO_WEBAPP_PLUGIN_HTMLEDITOR_JODIT_REPO_URL=${KOPANO_WEBAPP_PLUGIN_HTMLEDITOR_JODIT_REPO_URL:-"https://stash.kopano.io/scm/kwa/htmleditor-jodit.git"} \
     KOPANO_WEBAPP_PLUGIN_MATTERMOST_REPO_URL=${KOPANO_WEBAPP_PLUGIN_MATTERMOST_REPO_URL:-"https://stash.kopano.io/scm/kwa/mattermost.git"} \
     KOPANO_WEBAPP_PLUGIN_MDM_REPO_URL=${KOPANO_WEBAPP_PLUGIN_MDM_REPO_URL:-"https://stash.kopano.io/scm/kwa/mobile-device-management.git"} \
     KOPANO_WEBAPP_PLUGIN_MEET_REPO_URL=${KOPANO_WEBAPP_PLUGIN_MEET_REPO_URL:-"https://stash.kopano.io/scm/kwa/meet.git"} \
@@ -182,9 +182,9 @@ RUN set -ex && \
     ant deploy && \
     \
     ## HTML Editor: Jodit
-    git clone ${KOPANO_WEBAPP_PLUGIN_JODIT_REPO_URL} /usr/src/kopano-webapp/plugins/htmleditor-jodit && \
+    git clone ${KOPANO_WEBAPP_PLUGIN_HTMLEDITOR_JODIT_REPO_URL} /usr/src/kopano-webapp/plugins/htmleditor-jodit && \
     cd /usr/src/kopano-webapp/plugins/htmleditor-jodit && \
-    git checkout ${KOPANO_WEBAPP_PLUGIN_JODIT_VERSION} && \
+    git checkout ${KOPANO_WEBAPP_PLUGIN_HTMLEDITOR_JODIT_VERSION} && \
     set +e && \
     if [ -d "/build-assets/plugins/htmleditor-jodit" ] ; then cp -Rp /build-assets/plugins/htmleditor-jodit/* /usr/src/kopano-webapp/plugins/htmleditor-jodit/ ; fi; \
     if [ -d "/build-assets/scripts/plugin-htmleditor-jodit" ] ; then for script in /build-assets/scripts/plugin-htmleditorjodit/*.sh; do echo "** Applying $script"; bash $script; done && \ ; fi ; \
@@ -380,7 +380,7 @@ RUN set -ex && \
     echo "Kopano Webapp ${KOPANO_WEBAPP_VERSION} built from ${KOPANO_WEBAPP_REPO_URL} on $(date +'%Y-%m-%d %H:%M:%S')" > /rootfs/assets/.changelogs/kopano-webapp.version && \
     echo "Commit: $(cd /usr/src/kopano-webapp ; echo $(git rev-parse HEAD))" >> /rootfs/assets/.changelogs/kopano-webapp.version && \
     env | grep KOPANO | sort >> /rootfs/assets/.changelogs/kopano-webapp.version && \
-    echo "ZPush ${ZPUSH_VERSION} built on $(date +'%Y-%m-%d %H:%M:%S')" > /rootfs/assets/.changelogs/zpush.version && \
+    echo "ZPush ${Z_PUSH_VERSION} built on $(date +'%Y-%m-%d %H:%M:%S')" > /rootfs/assets/.changelogs/zpush.version && \
     cd /rootfs/ && \
     find . -name .git -type d -print0|xargs -0 rm -rf -- && \
     mkdir -p /kopano-webservices/ && \
