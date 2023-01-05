@@ -1,3 +1,9 @@
+## 2.4.1 2023-01-05 <dave at tiredofit dot ca>
+
+   ### Added
+      - Kopano Webapp 5.3.1
+
+
 ## 2.4.0 2022-03-03 <dave at tiredofit dot ca>
 
    ### Added
